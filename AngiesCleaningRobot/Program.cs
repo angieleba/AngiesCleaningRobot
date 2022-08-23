@@ -6,7 +6,7 @@ int commandNum = int.Parse(Console.ReadLine());
 Console.WriteLine("Insert robot position:");
 var pos = Console.ReadLine().Split(" ");
 
-List<Command> commands = new List<Command>() { new Command(Direction.DontMove) }; //Adding current position to command so the robot can clean current position
+List<Command> commands = new List<Command>();
 MyRobot robot = new MyRobot(int.Parse(pos[0]), int.Parse(pos[1]));
 
 for(int i = 1; i <= commandNum; i++)

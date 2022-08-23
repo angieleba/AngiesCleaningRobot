@@ -13,11 +13,14 @@ namespace AngiesCleaningRobot
 
         public RobotCommander(MyRobot robot, List<Command> commands)
         {
-            Commands = commands;
+            Commands.AddRange(commands);
             Robot = robot;
             Robot.PositionVisited += CheckIfAlreadyCleaned;
         }
 
+        /// <summary>
+        /// Internally set the robot to clean his starting point
+        /// </summary>
         public List<Command> Commands { get; private set; } = new List<Command>();
         public MyRobot Robot { get; private set; }
         private HashSet<Position> CleanedAlready { get; set; } = new HashSet<Position>();
@@ -34,9 +37,11 @@ namespace AngiesCleaningRobot
 
         public string CleanAll()
         {
+            Robot.CheckToClean(new Position(Robot.CurrentXPosition, Robot.CurrentYPosition)); //Clean starting position
+
             foreach (var command in Commands)
             {
-                Robot.VisitArea(command);
+                Robot.MoveToArea(command);
             }
 
             return "Cleaned: " + CleanedTotal;

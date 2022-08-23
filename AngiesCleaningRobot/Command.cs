@@ -24,7 +24,6 @@ namespace AngiesCleaningRobot
         W, 
         N,
         S,
-        DontMove
     }
 }
 

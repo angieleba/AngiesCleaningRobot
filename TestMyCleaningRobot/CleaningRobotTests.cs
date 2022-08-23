@@ -8,7 +8,7 @@ namespace TestMyCleaningRobot
         [TestMethod]
         public void TestStartingPosition()
         {
-            List<Command> commands = new List<Command>() { new Command(Direction.DontMove) }; 
+            List<Command> commands = new List<Command>(); 
             MyRobot robot = new MyRobot(10, 10);
             RobotCommander commander = new RobotCommander(robot, commands);
 
@@ -52,13 +52,13 @@ namespace TestMyCleaningRobot
             commands.Add(new Command(Direction.E, 5));
             commands.Add(new Command(Direction.N, 7));
             commands.Add(new Command(Direction.W, 5));
-            commands.Add(new Command(Direction.W, 7));
+            commands.Add(new Command(Direction.S, 7));
 
             MyRobot robot = new MyRobot(10, 10);
             RobotCommander commander = new RobotCommander(robot, commands);
 
             var totatCleaned = commander.CleanAll();
-            Assert.AreEqual("Cleaned: 2", totatCleaned, "Robot should have cleaned 24 places");
+            Assert.AreEqual("Cleaned: 24", totatCleaned, "Robot should have cleaned 24 places");
         }
     }
 }

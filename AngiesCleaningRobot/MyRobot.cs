@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AngiesCleaningRobot.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AngiesCleaningRobot
 {
-    public class MyRobot
+    public class MyRobot : IWalk, IClean
     {
         public MyRobot(int currentXPosition, int currentYPosition)
         {
@@ -25,28 +26,29 @@ namespace AngiesCleaningRobot
             handler?.Invoke(this, args);
         }
 
-        public void VisitArea(Command command)
+        public void MoveToArea(Command command)
         {
-            if(command.Direction == Direction.DontMove)
-                OnPositionVisited(new OnPositionVisitedEventArgs(new Position(CurrentXPosition, CurrentYPosition)));
-            else
+            for (int i = 1; i <= command.Steps; i++)
             {
-                for (int i = 1; i <= command.Steps; i++)
-                {
-                    MoveOneStep(command);
-                    OnPositionVisited(new OnPositionVisitedEventArgs(new Position(CurrentXPosition, CurrentYPosition)));
-                }
-            }         
+                MoveOneStep(command.Direction);
+                CheckToClean(new Position(CurrentXPosition, CurrentYPosition));
+
+            }
+        }
+
+        public void CheckToClean(Position position)
+        {
+            OnPositionVisited(new OnPositionVisitedEventArgs(position));
         }
 
         public void Clean(Position position)
         {
-            //Cleaned position
+            //actual cleaning
         }
 
-        private void MoveOneStep(Command command)
+        public void MoveOneStep(Direction direction)
         {
-            switch (command.Direction)
+            switch (direction)
             {
                 case Direction.E:
                     CurrentXPosition--;
