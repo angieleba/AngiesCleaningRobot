@@ -37,7 +37,7 @@ namespace AngiesCleaningRobot
 
         public string CleanAll()
         {
-            Robot.CheckToClean(new Position(Robot.CurrentXPosition, Robot.CurrentYPosition)); //Clean starting position
+            Robot.CheckVisitedPosition(new Position(Robot.CurrentXPosition, Robot.CurrentYPosition)); //Clean starting position
 
             foreach (var command in Commands)
             {

@@ -8,6 +8,6 @@ namespace AngiesCleaningRobot.Interfaces
 {
     public interface IClean
     {
-        void CheckToClean(Position position);
+        void CheckVisitedPosition(Position position);
     }
 }

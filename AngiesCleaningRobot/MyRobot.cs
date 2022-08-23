@@ -31,12 +31,12 @@ namespace AngiesCleaningRobot
             for (int i = 1; i <= command.Steps; i++)
             {
                 MoveOneStep(command.Direction);
-                CheckToClean(new Position(CurrentXPosition, CurrentYPosition));
+                CheckVisitedPosition(new Position(CurrentXPosition, CurrentYPosition));
 
             }
         }
 
-        public void CheckToClean(Position position)
+        public void CheckVisitedPosition(Position position)
         {
             OnPositionVisited(new OnPositionVisitedEventArgs(position));
         }
